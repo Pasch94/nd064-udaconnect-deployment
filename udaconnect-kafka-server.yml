@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: udaconnect-kafka-server
+  name: udaconnect-kafka-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: udaconnect-kafka-server
+  template:
+    metadata:
+      labels:
+        service: udaconnect-kafka-server
+    spec:
+      containers:
+      - image: pausch94/nd064-udaconnect-kafka-server:latest
+        name: udaconnect-kafka-server
+        imagePullPolicy: Always
+        env:
+        - name: KAFKA_LOCATION_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-env
+              key: KAFKA_LOCATION_TOPIC
+        - name: KAFKA_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-env
+              key: KAFKA_HOST
+        - name: KAFKA_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-env
+              key: KAFKA_PORT
+      restartPolicy: Always
