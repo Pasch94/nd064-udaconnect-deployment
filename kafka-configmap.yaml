@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 data:
   KAFKA_LOCATION_TOPIC: 'location'
+  KAFKA_PERSON_TOPIC: 'person'
   KAFKA_HOST: '127.0.0.1'
   KAFKA_PORT: '5100'
 metadata:
